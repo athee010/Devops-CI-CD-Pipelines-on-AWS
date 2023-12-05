@@ -1,0 +1,27 @@
+1. Create a user called dockeradmin
+   
+   useradd dockeradmin
+   passwd dockeradmin
+  
+2. Add a user to docker group to manage docker 
+   
+   usermod -aG docker dockeradmin
+
+3. To enable Password based authentication
+   
+   vi /etc/ssh/sshd_config
+    PasswordAuthentication yes
+
+   service sshd reload
+
+### Go to Jenkins console
+ Manage Jenkins - Available - Publish over ssh - Install
+ Manage Jenkins - Configure 
+ SSH Server 
+ Name : dockerhost
+ Hostname : <Pvt IP>
+ Username : dockeradmin
+ Advanced - Select Password based authentication - Enter password -Test Configuration-Save
+
+ ###Now you can authenticate from Jenkins server to Docker host as dockeradmin user
+ ###Integrated Dockerhost with Jenkins
