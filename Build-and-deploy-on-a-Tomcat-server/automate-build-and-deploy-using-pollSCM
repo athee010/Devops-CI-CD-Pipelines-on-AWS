@@ -1,0 +1,18 @@
+### Set Build Trigger - Poll SCM * * * * * on the Jenkins Console
+### Inside GitBash
+cd <location where you want to clone>
+git clone <repo link>
+vi index.jsp
+   <Update your code>
+
+git status
+git add .
+git status 
+git commit -m "updated index.jsp file"
+git push origin master 
+
+### Sign in using Personal Access Token
+
+### Build on the Jenkins Console 
+
+### View the changes by refreshing the Tomcat server
