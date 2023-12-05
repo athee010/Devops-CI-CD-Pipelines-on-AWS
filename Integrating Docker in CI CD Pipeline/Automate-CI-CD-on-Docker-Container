@@ -1,0 +1,16 @@
+### In the Jenkins console - To copy artifacts and Automate CI/CD on Docker container 
+1. New Item - "BuildandDeployOnContainer"
+2. Git repo link 
+3. Buid Triggers- Poll SCM
+4. Buils - pom.xml - clean install
+5. Post Build Actions - Send built artifacts over SSH
+6. Source file - webapp/target/*.war
+7. Remove file - webapp/target 
+8. Remote directory - //opt//docker
+9. Exec command -
+    cd /opt/docker;
+    docker build -t regapp:v1;
+    docker stop registerapp;
+    docker rm registerapp;
+    docker run -d --name registerapp -p 8085:8080 reggapp:v1;
+10. Save
