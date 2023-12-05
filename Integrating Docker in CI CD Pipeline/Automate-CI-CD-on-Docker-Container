@@ -2,7 +2,7 @@
 1. New Item - "BuildandDeployOnContainer"
 2. Git repo link 
 3. Buid Triggers- Poll SCM
-4. Buils - pom.xml - clean install
+4. Build - pom.xml - clean install
 5. Post Build Actions - Send built artifacts over SSH
 6. Source file - webapp/target/*.war
 7. Remove file - webapp/target 
