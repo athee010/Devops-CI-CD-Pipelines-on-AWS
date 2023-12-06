@@ -1,0 +1,36 @@
+Configure -Copy_Artifacts_on_to_ansible
+
+
+Source Code Management:
+
+Repository: <repo link>
+Branches to build : */master
+
+
+Build:
+
+Root POM:pom.xml
+Goals and options: clean install
+
+Post-build Actions
+
+Send build artifacts over SSH
+SSH Publishers
+SSH Server Name: ansible-server
+
+Source files: webapp/target/*.war
+Remove prefix: webapp/target
+Remote directory: //opt//docker
+Exec Command: 
+
+ansible-playbook /opt/docker/regapp.yml
+
+ansible-playbook /opt/docker/deploy_regapp.yml
+
+
+Build Now
+
+
+When code is changed in Git
+-Update in the ansible server and dockerhub
+-Delete exsiting container on Dockerhost and create a new one 

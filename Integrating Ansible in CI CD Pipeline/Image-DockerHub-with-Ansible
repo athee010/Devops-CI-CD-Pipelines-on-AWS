@@ -1,0 +1,72 @@
+### Create image and pushing it to Docker Hub with Ansible 
+
+sudo vi /etc/ansible/hosts
+
+[ansible]
+ip
+
+
+[dockerhost]
+ip
+
+
+## adding key to ansible server
+
+sudo su - ansadmin
+cd /opt/docker
+ssh-copy-id <ip of ansible server>
+
+## To push image onto dockerhub
+login to docker hub from the ansible server
+
+    docker login
+
+## Create a playbook to create image and push to docker hub
+
+    vi regapp.yml
+    ---
+    - hosts: ansible
+
+      tasks:
+      - name: create docker image
+        command: docker build -t regapp:latest .
+        args:
+         chdir: /opt/docker
+
+      - name: create tag to push image onto dockerhub
+        command: docker tag regapp:latest athee010/regapp:latest
+
+      - name: push docker image
+        command: docker push athee010/regapp:latest
+
+## Run the playbook
+
+    ansible-playbook regapp.yml
+
+### In the Jenkins console
+    Configure - "CopyartifactsontoAnsible"
+    Source Code Management:
+
+Repository: <repo link>
+Branches to build : */master
+
+Buid Trigger:
+ Poll SCM
+
+Build:
+
+Root POM:pom.xml
+Goals and options: clean install
+
+Post-build Actions
+
+Send build artifacts over SSH
+SSH Publishers
+SSH Server Name: ansible-server
+
+Source files: webapp/target/*.war
+Remove prefix: webapp/target
+Remote directory: //opt//docker
+Exec command:  ansible-playbook /opt/dockerregapp.yml
+
+### In the Git make changes to the code

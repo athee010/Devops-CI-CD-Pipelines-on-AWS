@@ -1,0 +1,28 @@
+## Install docker in Ansible
+    sudo su - ansadmin
+    sudo yum install docker 
+
+## to add ansadmin to the docker group, to execute docker commands as ansadmin
+    usermod -aG docker ansadmin
+    id ansadmin
+
+## to start docker 
+    sudo service docker start
+    sudo service docker status
+
+## Create dockerfile to build image
+    vi dockerfile
+    FROM tomcat:latest
+    RUN cp -R /usr/local/tomcat/webapps.dist/* /usr/local/tomcat/webapps
+    COPY ./*.war /usr/local/tomcat/webapps
+
+chmod 777 /var/run/docker.sock
+
+sudo docker build -t regapp:v1 .
+
+docker images
+
+## To create container
+    docker run -t --name regapp-server -p 8081:8080 regapp:v1
+
+## View the browser 

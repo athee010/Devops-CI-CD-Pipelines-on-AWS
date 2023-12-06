@@ -1,0 +1,37 @@
+### Ansible - Control Node and Dockerhost - Managed host
+
+## Inside Dockerhost 
+ 
+   sudo su -
+   useradd ansadmin
+   passwd ansadmin
+
+# Add the user to sudoers file, to give administrative access
+   
+    visudo
+     ansadmin ALL=(ALL)       NOPASSWD: ALL
+
+# To enable Password based authentication
+
+    vi /etc/ssh/sshd_config
+     Password authentication yes
+
+# For Private IP of Dockerhost
+    ifconfig
+
+# To add Dockerhost as managed node 
+
+### Inside the Ansible server 
+    
+Default inventory   
+    vi /etc/ansible/hosts
+     <Pvt IP of Dockerhost>
+
+# To copy the ssh key of ansible to target system i.e. dockerhost
+    sudo su - ansadmin
+    ssh-copy-id <pvt IP of Dockerhost>
+
+# To ping to the managed host
+    ansible all -m ping 
+
+### Ansible can communicate with Dockerhost with Passwordless authentication.
