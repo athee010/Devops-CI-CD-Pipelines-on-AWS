@@ -1,0 +1,34 @@
+### Inside Ansible server
+    cd /opt
+    sudo mkdir docker
+
+    sudo chown ansadmin:ansadmin docker
+
+### Inside the Jenkins console 
+
+ From Jenkins home page select "New Item"
+ Enter an item name: Copy_Artifacts_on_to_ansible
+
+
+Source Code Management:
+
+Repository: <repo link>
+Branches to build : */master
+
+
+Build:
+
+Root POM:pom.xml
+Goals and options: clean install
+
+Post-build Actions
+
+Send build artifacts over SSH
+SSH Publishers
+SSH Server Name: ansible-server
+
+Source files: webapp/target/*.war
+Remove prefix: webapp/target
+Remote directory: //opt//docker
+
+## Build - Artifacts are copied 
