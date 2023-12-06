@@ -1,0 +1,16 @@
+Integration between Ansible-control-node and Jenkins
+Install "publish Over SSH"
+
+Manage Jenkins > Manage Plugins > Available > Publish over SSH
+Enable connection between Ansible-control-node and Jenkins
+
+Manage Jenkins > Configure System > Publish Over SSH > SSH Servers
+
+SSH Servers: - Name: ansible-server
+Hostname:<Server pvt IP>
+
+username: ansadmin
+
+Advanced > choose Use password authentication, or use a different key
+
+password: *******
