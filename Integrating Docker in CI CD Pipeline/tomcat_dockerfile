@@ -1,10 +1,16 @@
-FROM centos
-RUN yum install java -y
-RUN mkdir /opt/tomcat/
-WORKDIR /opt/tomcat
-ADD https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.54/bin/apache-tomcat-9.0.54.tar.gz /opt/tomcat
-RUN tar xvfz apache*.tar.gz
-RUN mv apache-tomcat-9.0.54/* /opt/tomcat 
-EXPOSE 8080
-CMD ["/opt/tomcat/bin/catalina.sh", "run"]
+###Create docker file 
+vi dockerfile
+FROM tomcat:latest
+RUN cp -R /usr/local/tomcat/webapps.dist/* /usr/local/tomcat/webapps
 
+###Build docker image
+docker build -t tomcatdocker .
+
+docker images
+
+####Create tomcat container
+docker run -d --name tomcat1 -p 8082:8080 tomcatdocker
+
+docker ps -a
+
+###Go to the tomcat server page 
