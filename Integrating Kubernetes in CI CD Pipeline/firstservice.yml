@@ -1,0 +1,18 @@
+apiVersion: v1 
+kind: Service
+metadata:
+  name: demo-service
+
+spec:
+  ports: 
+  - name: demo-service 
+    port: 80
+    targetPort: 80
+  
+  selector: 
+    app: demo-app
+
+  type: LoadBalancer 
+
+  kubectl apply -f firstservice.yml
+  kubectl expose webapp --type=NodePort --targerPort=80 --
